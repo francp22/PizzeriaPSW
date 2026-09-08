@@ -15,17 +15,37 @@ import java.util.List;
 @NoArgsConstructor
 public class Order {
 
+    public enum OrderType {//Tipi di ordine: ritiro o consegna
+        TAKEAWAY,
+        DELIVERY
+    }
+
+    public enum OrderStatus {//Stati possibili dell'ordine
+        PREPARING,
+        READY,
+        OUT_FOR_DELIVERY,
+        DELIVERED
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private LocalDateTime creationDate;
-
     private double total;
+    private String street;
+    private String city;
+    private String phoneNumber;
 
     @ManyToOne
     private User user;
 
     @OneToMany(mappedBy = "order")
     private List<OrderItem> items;
+
+    @Enumerated(EnumType.STRING)
+    private OrderType type;
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
 }
