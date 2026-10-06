@@ -71,11 +71,6 @@ public class ProductService {
     }
 
     @Transactional(readOnly = true)
-    public List<Category> showAllCategories() {
-        return categoryRepository.findAll();
-    }
-
-    @Transactional(readOnly = true)
     public List<Product> showProductsByCategory(Integer categoryId) {
         return productRepository.findByCategoryId(categoryId);
     }
@@ -93,14 +88,4 @@ public class ProductService {
         }
     }
 
-    @Transactional(readOnly = false)
-    public void addCategory(Category category)
-            throws CategoryAlreadyExistException {
-
-        if (categoryRepository.existsByName(category.getName())) {
-            throw new CategoryAlreadyExistException();
-        }
-
-        categoryRepository.save(category);
-    }
 }

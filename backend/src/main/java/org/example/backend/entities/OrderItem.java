@@ -1,5 +1,6 @@
 package org.example.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,6 +24,7 @@ public class OrderItem {
 
     private double unitPrice;
 
+    @JsonIgnore
     @ManyToOne
     private Order order;
 
