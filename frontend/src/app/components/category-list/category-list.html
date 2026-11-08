@@ -1,0 +1,10 @@
+<h2>Categorie</h2>
+
+@for (category of categories(); track category.id) {
+<p>
+  ID: {{ category.id }} -
+  {{ category.name }}
+</p>
+} @empty {
+<p>Nessuna categoria disponibile.</p>
+}

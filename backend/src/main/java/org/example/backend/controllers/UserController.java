@@ -1,5 +1,8 @@
 package org.example.backend.controllers;
 
+import jakarta.validation.Valid;
+import org.example.backend.dto.UserDTO;
+import org.example.backend.dto.UserRegistrationDTO;
 import org.example.backend.entities.User;
 import org.example.backend.support.exceptions.*;
 import org.example.backend.services.UserService;
@@ -18,35 +21,26 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity create(@RequestBody User user) {
+    public ResponseEntity<?> create(@Valid @RequestBody UserRegistrationDTO dto) {
         try {
-            User added = userService.registerUser(user);
-            return new ResponseEntity<>(added, HttpStatus.OK);
-
+            User added = userService.registerUser(dto);
+            return new ResponseEntity<>(UserDTO.from(added), HttpStatus.CREATED);
         } catch (MailUserAlreadyExistsException e) {
-            return new ResponseEntity<>(
-                    "User already exists!",
-                    HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("User already exists!", HttpStatus.BAD_REQUEST);
         }
     }
 
     @GetMapping
-    public List<User> getAll() {
-        return userService.getAllUsers();
+    public List<UserDTO> getAll() {
+        return userService.getAllUsers().stream().map(UserDTO::from).toList();
     }
 
     @GetMapping("/search/by_email")
-    public ResponseEntity getByEmail(
-            @RequestParam String email) {
-
+    public ResponseEntity<?> getByEmail(@RequestParam String email) {
         try {
-            User user = userService.getUserByEmail(email);
-            return new ResponseEntity<>(user, HttpStatus.OK);
-
+            return new ResponseEntity<>(UserDTO.from(userService.getUserByEmail(email)), HttpStatus.OK);
         } catch (UserNotFoundException e) {
-            return new ResponseEntity<>(
-                    "User not found!",
-                    HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("User not found!", HttpStatus.BAD_REQUEST);
         }
     }
 }

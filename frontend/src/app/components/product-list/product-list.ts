@@ -1,10 +1,11 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { Product } from '../../model/product';
 import { ProductManagerService } from '../../manager/product-manager.service';
+import {CurrencyPipe} from '@angular/common';
 
 @Component({
   selector: 'app-product-list',
-  imports: [],
+  imports: [CurrencyPipe],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css'
 })
