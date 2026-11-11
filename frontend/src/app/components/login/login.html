@@ -1,1 +1,30 @@
-<p>login works!</p>
+<section class="login-container">
+
+  <h2>Bentornato!</h2>
+  <p class="subtitle">Accedi al tuo account per continuare</p>
+
+  <div class="form-group">
+    <label>Email</label>
+    <input
+      type="email"
+      [(ngModel)]="user.email"
+      placeholder="Inserisci la tua email">
+  </div>
+
+  <div class="form-group">
+    <label>Password</label>
+    <input
+      type="password"
+      [(ngModel)]="user.password"
+      placeholder="Inserisci la tua password">
+  </div>
+
+  <button (click)="login()">Accedi</button>
+
+  <p class="register-link">
+    Non hai un account?
+    <a routerLink="/registrazione">Registrati</a>
+  </p>
+  <a routerLink="/">← Torna al menù</a>
+
+</section>

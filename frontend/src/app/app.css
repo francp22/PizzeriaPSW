@@ -1,0 +1,13 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: #f7f4ef;
+  color: #292421;
+  font-family: Roboto, sans-serif;
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 30px 50px;
+}

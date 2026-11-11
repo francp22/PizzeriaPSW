@@ -16,4 +16,9 @@ export class ProductManagerService {
   getAllProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.serverUrl + '/products');
   }
+  getProductsByCategory(categoryId: number): Observable<Product[]> {
+    return this.http.get<Product[]>(
+      this.serverUrl + '/products/category/' + categoryId
+    );
+  }
 }

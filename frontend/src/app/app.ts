@@ -1,12 +1,13 @@
+
 import { Component } from '@angular/core';
-import { ProductList } from './components/product-list/product-list';
-import { CategoryList } from './components/category-list/category-list';
-import { UserRegister } from './components/user-register/user-register';
+import { RouterOutlet } from '@angular/router';
+import { Navbar } from './components/navbar/navbar';
 
 @Component({
   selector: 'app-root',
-  imports: [ProductList, CategoryList, UserRegister],
+  imports: [RouterOutlet, Navbar],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {}
+

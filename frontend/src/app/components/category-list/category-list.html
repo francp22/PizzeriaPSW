@@ -1,10 +1,20 @@
-<h2>Categorie</h2>
+<section class="categories-section">
 
-@for (category of categories(); track category.id) {
-<p>
-  ID: {{ category.id }} -
-  {{ category.name }}
-</p>
-} @empty {
-<p>Nessuna categoria disponibile.</p>
-}
+  <nav class="categories-menu">
+
+    <button
+      [class.selected]="selectedCategoryId() === null"
+      (click)="selectCategory(null)">
+      Tutte
+    </button>
+
+    @for (category of categories(); track category.id) {
+    <button
+      [class.selected]="selectedCategoryId() === category.id"
+      (click)="selectCategory(category.id)">
+      {{ category.name }}
+    </button>
+    }
+
+  </nav>
+</section>

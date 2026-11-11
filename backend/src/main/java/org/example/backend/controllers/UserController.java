@@ -1,6 +1,7 @@
 package org.example.backend.controllers;
 
 import jakarta.validation.Valid;
+import org.example.backend.dto.LoginDTO;
 import org.example.backend.dto.UserDTO;
 import org.example.backend.dto.UserRegistrationDTO;
 import org.example.backend.entities.User;
@@ -41,6 +42,16 @@ public class UserController {
             return new ResponseEntity<>(UserDTO.from(userService.getUserByEmail(email)), HttpStatus.OK);
         } catch (UserNotFoundException e) {
             return new ResponseEntity<>("User not found!", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@Valid @RequestBody LoginDTO dto){
+        try{
+            User user=userService.login(dto.email(), dto.password());
+            return new ResponseEntity<>(UserDTO.from(user),HttpStatus.OK);
+        }catch(UserNotFoundException e){
+            return new ResponseEntity<>("Email o password non corretti",HttpStatus.UNAUTHORIZED);
         }
     }
 }

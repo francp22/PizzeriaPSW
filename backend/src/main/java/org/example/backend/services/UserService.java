@@ -57,6 +57,18 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
+    public User login(String email, String password) throws UserNotFoundException {
+
+        User user = userRepository.findByEmail(email);
+
+        if (user == null || !passwordEncoder.matches(password, user.getPassword())) {
+            throw new UserNotFoundException();
+        }
+
+        return user;
+    }
+
+    @Transactional(readOnly = true)
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
